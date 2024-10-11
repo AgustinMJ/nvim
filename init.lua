@@ -863,6 +863,25 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      -- Move any selection in any direction
+      --
+      -- - (Meta) + hjkl
+      require('mini.move').setup()
+
+      -- Comment lines
+      -- - gc  - Toggle coment
+      -- - gcc - Toggle comment on current line
+      --
+      require('mini.comment').setup()
+      -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
+      require('mini.comment').setup {
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      }
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
